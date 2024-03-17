@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Page</h1>
 <?php
 
 include "libs/User.class.php";
@@ -22,3 +31,7 @@ echo "<a href='login.php'>Sign in</a>";
 $user -> register($_SESSION["first_name"], $_SESSION["last_name"], $_SESSION["email"], $_SESSION["password"], $_SESSION["secret"])
 
 ?>
+
+</div>
+</body>
+</html>
