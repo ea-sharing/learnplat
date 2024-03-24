@@ -7,11 +7,11 @@ define('DB_PASSWORD', 'secret_password'); // Replace
 define('DB_DATABASE', 'demoappdb');
 
 /* AWS S3 CONFIGURATION */
-define('AWS_REGION', 'us-east-1'); // Replace 'yourregion' with your actual AWS region
+define('AWS_REGION', 'your-region'); // Replace 'yourregion' with your actual AWS region
 define('AWS_VERSION', 'latest');
-define('AWS_ACCESS_KEY', 'AKIA2QMWWZVNPF7GFZXJ'); // Replace 'youraccesskey' with your actual AWS access key
-define('AWS_SECRET_KEY', 'ag3SH9Tej2WWTmhMbALETlhA3sCG2M7VvhcYd1I1'); // Replace 'your-secret-key' with your actual AWS secret key
-define('AWS_BUCKET', 'mybucket2024my'); // Replace 'your-bucket' with your actual AWS S3 bucket name
+define('AWS_ACCESS_KEY', 'your-access-key'); // Replace 'youraccesskey' with your actual AWS access key
+define('AWS_SECRET_KEY', 'your-secret-key'); // Replace 'yoursecretkey' with your actual AWS secret key
+define('AWS_BUCKET', 'your-bucket'); // Replace 'yourbucket' with your actual AWS S3 bucket name
 
 
 function getDB() 
