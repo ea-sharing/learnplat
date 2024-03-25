@@ -18,6 +18,14 @@
 --
 -- Table structure for table `certificates`
 --
+DROP DATABASE IF EXISTS demoappdb;
+
+CREATE DATABASE demoappdb CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
+FLUSH PRIVILEGES;
+ 
+
+USE demoappdb;
 
 DROP TABLE IF EXISTS `certificates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
