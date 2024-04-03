@@ -20,6 +20,7 @@ CREATE DATABASE demoappdb CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 FLUSH PRIVILEGES;
 USE demoappdb;
 
+<<<<<<< HEAD
 --
 -- Table structure for table `assessment_results`
 --
@@ -78,10 +79,11 @@ INSERT INTO `assessments` VALUES (1,'DevOps Assessment');
 /*!40000 ALTER TABLE `assessments` ENABLE KEYS */;
 UNLOCK TABLES;
 
+=======
+>>>>>>> 09a1684da58d3623380cedd3206964bfbe9ddf8e
 --
 -- Table structure for table `certificates`
 --
-
 DROP TABLE IF EXISTS `certificates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
