@@ -30,7 +30,6 @@ $ga = new GoogleAuthenticator();
 $_SESSION["secret"] = $ga -> createSecret();
 
 $qrCodeUrl = $ga->getQRCodeGoogleUrl($_SESSION["email"], $_SESSION["secret"], "Algonquin College Demo App");
-
 ?>
 <!DOCTYPE html>
 <html>

@@ -79,17 +79,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
     }
 }
 
-// Fetch course completion and enrollment statistics
-// $stmtCompleted = $pdo->prepare("SELECT COUNT(*) AS completed_courses FROM user_course_progress WHERE uid = :uid AND completed = 1");
-$stmtCompleted = $pdo->prepare("SELECT COUNT(*) AS completed_courses FROM completed_courses WHERE uid = :uid AND completed = 1");
-$stmtCompleted->bindParam(":uid", $_SESSION['uid']);
-$stmtCompleted->execute();
-$completedCourses = $stmtCompleted->fetch(PDO::FETCH_ASSOC);
-
-$stmtEnrolled = $pdo->prepare("SELECT COUNT(*) AS enrolled_courses FROM enrolled_courses WHERE uid = :uid");
-$stmtEnrolled->bindParam(":uid", $_SESSION['uid']);
-$stmtEnrolled->execute();
-$enrolledCourses = $stmtEnrolled->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -101,20 +90,23 @@ $enrolledCourses = $stmtEnrolled->fetch(PDO::FETCH_ASSOC);
 <body>
 <div id="container">
     <h1>User Profile</h1>
-    <h3>Welcome <a href="userprofile.php"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+    <div class="theader">
+        <h3>Welcome <a href="userprofile.php"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+        <a href="logout.php">Logout</a>
+    </div>
     <div id="buttons">
         <button onclick="location.href='home.php'" class="button">Home</button>
         <button onclick="location.href='browse_courses.php'" class="button">Browse Courses</button>
         <button onclick="location.href='enroll_courses.php'" class="button">Enroll in Courses</button>
-        <button onclick="location.href='track_progress.php'" class="button">Track Progress</button>
+        <button onclick="location.href='assessments.php'" class="button">Assessments</button>
+        <button onclick="location.href='blog.php'" class="button">Blogs</button>
+        <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
         <button onclick="location.href='search.php'" class="button">Search</button>
-        <button onclick="location.href='logout.php'" class="button">Logout</button>
-    </div>   <p></p>
+    </div>
+
+  <p></p>
 
    <p>Email: <?= $details->email ?></p>
-   <h3>Course Statistics</h3>
-    <p>Completed Courses: <?= $completedCourses['completed_courses'] ?></p>
-    <p>Enrolled Courses: <?= $enrolledCourses['enrolled_courses'] ?></p>
 
     <h3>User Profile Information</h3>
     <?php

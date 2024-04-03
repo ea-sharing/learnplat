@@ -23,8 +23,8 @@ echo "<pre>";
 echo $_SESSION["email"] . "\n";
 echo $_SESSION["first_name"] . "\n";
 echo $_SESSION["last_name"] . "\n";
-#echo $_SESSION["password"] . "\n";
-#echo $_SESSION["secret"] . "\n";
+echo $_SESSION["password"] . "\n";
+echo $_SESSION["secret"] . "\n";
 echo "</pre>";
 
 echo "<a href='login.php'>Sign in</a>";

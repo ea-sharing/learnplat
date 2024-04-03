@@ -15,6 +15,69 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP DATABASE IF EXISTS demoappdb;
+CREATE DATABASE demoappdb CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+FLUSH PRIVILEGES;
+USE demoappdb;
+
+--
+-- Table structure for table `assessment_results`
+--
+
+DROP TABLE IF EXISTS `assessment_results`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assessment_results` (
+  `result_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `assessment_id` int NOT NULL,
+  `correct_answers` int NOT NULL,
+  `total_questions` int NOT NULL,
+  `percentage` decimal(5,2) NOT NULL,
+  `result` enum('Pass','Fail') NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`result_id`),
+  KEY `user_id` (`user_id`),
+  KEY `assessment_id` (`assessment_id`),
+  CONSTRAINT `assessment_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`uid`),
+  CONSTRAINT `assessment_results_ibfk_2` FOREIGN KEY (`assessment_id`) REFERENCES `assessments` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assessment_results`
+--
+
+LOCK TABLES `assessment_results` WRITE;
+/*!40000 ALTER TABLE `assessment_results` DISABLE KEYS */;
+INSERT INTO `assessment_results` VALUES (11,14,1,9,10,90.00,'Pass','2024-04-02 02:13:45');
+/*!40000 ALTER TABLE `assessment_results` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assessments`
+--
+
+DROP TABLE IF EXISTS `assessments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assessments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assessments`
+--
+
+LOCK TABLES `assessments` WRITE;
+/*!40000 ALTER TABLE `assessments` DISABLE KEYS */;
+INSERT INTO `assessments` VALUES (1,'DevOps Assessment');
+/*!40000 ALTER TABLE `assessments` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `certificates`
 --
@@ -30,7 +93,7 @@ CREATE TABLE `certificates` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `fk_certificates_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +102,39 @@ CREATE TABLE `certificates` (
 
 LOCK TABLES `certificates` WRITE;
 /*!40000 ALTER TABLE `certificates` DISABLE KEYS */;
+INSERT INTO `certificates` VALUES (39,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_WebDevelopment_certificate.pdf',1),(40,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DigitalMarketingEssentials_certificate.pdf',8),(41,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_MobileAppDevelopment_certificate.pdf',3),(42,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DataScience_certificate.pdf',2),(43,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_MobileAppDevelopment_certificate.pdf',3),(44,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DataScience_certificate.pdf',2);
 /*!40000 ALTER TABLE `certificates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `completed_assessments`
+--
+
+DROP TABLE IF EXISTS `completed_assessments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `completed_assessments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `assessment_id` int NOT NULL,
+  `question_id` int NOT NULL,
+  `option_id` int NOT NULL,
+  `is_correct` tinyint(1) DEFAULT '0',
+  `completed_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_question` (`user_id`,`question_id`),
+  KEY `assessment_id` (`assessment_id`),
+  CONSTRAINT `completed_assessments_ibfk_1` FOREIGN KEY (`assessment_id`) REFERENCES `assessments` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `completed_assessments`
+--
+
+LOCK TABLES `completed_assessments` WRITE;
+/*!40000 ALTER TABLE `completed_assessments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `completed_assessments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +154,7 @@ CREATE TABLE `completed_courses` (
   KEY `fk_ucp_course_id` (`course_id`),
   CONSTRAINT `fk_ucp_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ucp_uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +163,7 @@ CREATE TABLE `completed_courses` (
 
 LOCK TABLES `completed_courses` WRITE;
 /*!40000 ALTER TABLE `completed_courses` DISABLE KEYS */;
+INSERT INTO `completed_courses` VALUES (111,14,1,1),(112,14,8,1),(113,14,3,1),(114,14,2,1);
 /*!40000 ALTER TABLE `completed_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +211,7 @@ CREATE TABLE `enrolled_courses` (
   KEY `course_id` (`course_id`),
   CONSTRAINT `fk_user_courses_courses` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_user_courses_users` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,8 +220,86 @@ CREATE TABLE `enrolled_courses` (
 
 LOCK TABLES `enrolled_courses` WRITE;
 /*!40000 ALTER TABLE `enrolled_courses` DISABLE KEYS */;
-INSERT INTO `enrolled_courses` VALUES (37,1,2,0),(43,4,2,0),(44,4,1,0),(45,4,3,0);
+INSERT INTO `enrolled_courses` VALUES (57,14,8,0),(59,14,2,0),(60,14,3,0),(61,14,9,0),(62,14,4,0);
 /*!40000 ALTER TABLE `enrolled_courses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `options`
+--
+
+DROP TABLE IF EXISTS `options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `options` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `question_id` int NOT NULL,
+  `option_text` varchar(255) NOT NULL,
+  `is_correct` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `options`
+--
+
+LOCK TABLES `options` WRITE;
+/*!40000 ALTER TABLE `options` DISABLE KEYS */;
+INSERT INTO `options` VALUES (1,1,'Continuous Integration',1),(2,1,'Continuous Deployment',0),(3,1,'Configuration Integration',0),(4,1,'Configuration Deployment',0),(5,2,'Continuous Integration',0),(6,2,'Continuous Deployment',1),(7,2,'Configuration Integration',0),(8,2,'Configuration Deployment',0),(9,3,'Git',0),(10,3,'Ansible',0),(11,3,'Puppet',0),(12,3,'Jenkins',1),(13,4,'To automate the deployment process',0),(14,4,'To ensure that the code is integrated frequently',1),(15,4,'To manage server configurations',0),(16,4,'To monitor application performance',0),(17,5,'To automate the deployment process',0),(18,5,'To ensure that the code is integrated frequently',0),(19,5,'To manage server configurations',0),(20,5,'To deploy code changes to production quickly and safely',1),(21,6,'Continuous integration and continuous delivery',1),(22,6,'Infrastructure as code',0),(23,6,'Automated testing',0),(24,6,'Agile development',0),(25,7,'To reduce manual work and human error',1),(26,7,'To increase the cost of operations',0),(27,7,'To slow down the development process',0),(28,7,'To make developers jobs harder',0),(29,8,'A lightweight, standalone, executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and dependencies',1),(30,8,'A virtual machine that runs multiple isolated applications',0),(31,8,'A process that runs in the background and performs tasks on a server',0),(32,8,'A tool for managing containers in a distributed environment',0),(33,9,'To automate the deployment process',0),(34,9,'To manage server configurations',0),(35,9,'To deploy code changes to production quickly and safely',0),(36,9,'To orchestrate and manage containers at scale',1),(37,10,'Faster delivery of features and updates',1),(38,10,'Increased collaboration between development and operations teams',1),(39,10,'More stable operating environments',1),(40,10,'Reduced risk of deployment failures',1);
+/*!40000 ALTER TABLE `options` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `posts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `date` datetime NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `posts`
+--
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (6,'containerd vs. Docker: Understanding Their Relationship and How They Work Together','During past decade, containers have revolutionized software development by introducing higher levels of consistency and scalability. Now, developers can work without the challenges of dependency management, environment consistency, and collaborative workflows.\r\n\r\nWhen developers explore containerization, they might learn about container internals, architecture, and how everything fits together. And, eventually, they may find themselves wondering about the differences between containerd and Docker and how they relate to one another.\r\n\r\nIn this blog post, we’ll explain what containerd is, how Docker and containerd work together, and how their combined strengths can improve developer experience.','2024-04-01 16:28:49',14);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `questions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `assessment_id` int NOT NULL,
+  `question_text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questions`
+--
+
+LOCK TABLES `questions` WRITE;
+/*!40000 ALTER TABLE `questions` DISABLE KEYS */;
+INSERT INTO `questions` VALUES (1,1,'What does \"CI\" stand for in DevOps?'),(2,1,'What does \"CD\" stand for in DevOps?'),(3,1,'Which of the following tools is not typically used for configuration management in DevOps?'),(4,1,'What is the main goal of continuous integration (CI) in DevOps?'),(5,1,'What is the main goal of continuous delivery (CD) in DevOps?'),(6,1,'Which of the following is a key principle of DevOps?'),(7,1,'What is the role of automation in DevOps?'),(8,1,'What is a Docker container?'),(9,1,'What is the purpose of Kubernetes in DevOps?'),(10,1,'What are some benefits of using DevOps practices?');
+/*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -153,7 +327,6 @@ CREATE TABLE `userprofile` (
 
 LOCK TABLES `userprofile` WRITE;
 /*!40000 ALTER TABLE `userprofile` DISABLE KEYS */;
-INSERT INTO `userprofile` VALUES (1,1,'Ontario','43899333','1980-02-28'),(2,1,'Ontario','43899333','1980-02-28'),(3,1,'Ontario','43899333','1980-02-28'),(4,1,'Ontario','43899333','1980-02-28'),(5,1,'Ontario','43899333','1980-02-28'),(6,1,'Ontario','43899333','1980-02-28'),(7,1,'Ontario','43899333','1980-02-28'),(8,1,'Ontario','43899333','1980-02-28'),(9,1,'Ontario','43899333','1980-02-28'),(10,1,'Ontario','43899333','1980-02-28'),(11,1,'Ontario','43899333','1980-02-28'),(12,1,'Ontario','43899333','1980-02-28'),(13,1,'Ontario','43899333','1980-02-28'),(14,1,'Ontario','43899333','1980-02-28'),(15,1,'Ontario','43899333','1980-02-28');
 /*!40000 ALTER TABLE `userprofile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +345,7 @@ CREATE TABLE `users` (
   `password` varchar(200) DEFAULT NULL,
   `auth_seed_value` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +354,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Emil','Asgarov','asga0006@algonquinlive.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','45D24YFR2KOTNFIC'),(4,'Jef','Ask','emil.asg78@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','XY5M36QOKLZUOIYY'),(5,'Ferhad','Asgarli','emil.ask78@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','GWFWNNK4ERRRDLDP'),(6,'Ferhad','Asgarli','emil.ask78@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','GWFWNNK4ERRRDLDP');
+INSERT INTO `users` VALUES (14,'Emil','Asg','emil.asg78@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','JUIYQ2DBKZCN4PBU');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -194,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-24 17:53:38
+-- Dump completed on 2024-04-02 19:27:02
