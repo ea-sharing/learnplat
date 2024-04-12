@@ -79,7 +79,8 @@ class GoogleAuthenticator
 	  if (isset($title)) {
         $urlencoded .= urlencode('&issuer=' . urlencode($title));
       }
-      return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=' . $urlencoded.'';
+      // return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=' . $urlencoded.'';
+      return 'https://qrcode.tec-it.com/API/QRCode?size=small&dpi=120&data=' . $urlencoded.'';
     }
 
     /**
