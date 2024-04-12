@@ -102,6 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
         <button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='contact.php'" class="button">Contact Us</button>
+
     </div>
 
   <p></p>

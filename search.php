@@ -65,7 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-        <button onclick="location.href='search.php'" class="button">Search</button>
+	<button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='contact.php'" class="button">Contact Us</button>
+
     </div>
 
 <p></p>
