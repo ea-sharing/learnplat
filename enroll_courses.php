@@ -111,7 +111,7 @@ function getCourses() {
 <html>
 <head>
     <title>Enroll in Courses</title>
-    <link rel="stylesheet" type="text/css" href="style.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="libs/style.css" charset="utf-8"/>
     <style>
         
     </style>
