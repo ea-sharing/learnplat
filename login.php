@@ -1,8 +1,3 @@
-<?php
-$error_message = "";
-if (isset($_GET['msg']))
-  $error_message = $_GET['msg'];
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,17 +22,23 @@ if (isset($_GET['msg']))
             padding: 20px;
         }
 
-        #login {
+        #login,
+        .platform-info {
             width: 45%;
-            border: 2px solid #365D98;
             padding: 20px;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        #login h3 {
-            margin: 0;
+        #login {
+            border: 2px solid #365D98;
+            margin-bottom: 20px;
+        }
+
+        #login h3,
+        .platform-info h2 {
+            margin-top: 0;
             font-size: 24px;
             color: #365D98;
             text-align: center;
@@ -99,31 +100,15 @@ if (isset($_GET['msg']))
             text-align: center;
         }
 
-        .platform-info {
-            width: 45%;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .platform-info h2 {
-            color: #365D98;
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
         .platform-info p {
             margin-bottom: 10px;
             line-height: 1.5;
+            text-align: justify;
         }
 
         .platform-info ul {
             padding-left: 20px;
         }
-
     </style>
 </head>
 <body>
@@ -163,4 +148,3 @@ if (isset($_GET['msg']))
 </div>
 </body>
 </html>
-
