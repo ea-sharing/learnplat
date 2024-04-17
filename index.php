@@ -3,73 +3,7 @@
 <head>
     <title>Interactive Online Learning Platform</title>
     <link rel="stylesheet" type="text/css" href="libs/style.css" charset="utf-8"/>
-    <style>
-        /* Additional CSS for styling */
-        body {
-            background-color: #f2f2f2;
-            font-family: Arial, sans-serif;
-            color: #333333;
-            margin: 0;
-            padding: 0;
-        }
-
-        #container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #365D98;
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
-
-        #signup, #login {
-            display: inline-block;
-            width: 45%;
-            border: 2px solid #365D98;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #signup h3, #login h3 {
-            margin: 0;
-            font-size: 24px;
-            color: #365D98;
-        }
-
-        #signup a, #login a {
-            color: #365D98;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        #signup a:hover, #login a:hover {
-            color: #3ac162;
-        }
-
-        .info {
-            margin-top: 40px;
-            text-align: left;
-            padding: 20px;
-            border: 2px solid #365D98;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        @media only screen and (max-width: 600px) {
-            #signup, #login {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-        }
-    </style>
+   
 </head>
 <body>
 <div id="container">
