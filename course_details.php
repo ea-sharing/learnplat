@@ -105,20 +105,20 @@ if ($page * $per_page >= $total_sentences) {
 <body>
 <div id="container">
     <h1>Course Details</h1>
-    <div class="theader">
-        <h3>Welcome <a href="userprofile.php"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
-        <a href="logout.php">Logout</a>
+    <div id="user-profile">
+        <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+        <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     </div>
-    <div id="buttons">
+    <div id="toolbar">
         <button onclick="location.href='home.php'" class="button">Home</button>
         <button onclick="location.href='browse_courses.php'" class="button">Browse Courses</button>
         <button onclick="location.href='enroll_courses.php'" class="button">Enroll in Courses</button>
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-        <button onclick="location.href='search.php'" class="button">Search</button>
+	    <button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
-
     </div>
 
     <h2>Course Content</h2>
@@ -131,6 +131,17 @@ if ($page * $per_page >= $total_sentences) {
     <?php if ($end < $total_sentences): ?>
         <a href="course_details.php?course_id=<?= $course_id ?>&page=<?= ($page + 1) ?>">Next Page</a>
     <?php endif; ?>
+</div>
+
+<!-- Modal for displaying course completion -->
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('resultModal').style.display = 'none';">&times;</span>
+        <h2>Course Completed!</h2>
+        <p>Congratulations! You have completed the course.</p>
+        <p>Download your certificate:</p>
+        <a href="<?= $downloadLink ?>" download>Download Certificate</a>
+    </div>
 </div>
 </body>
 </html>
