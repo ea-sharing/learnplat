@@ -156,16 +156,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div id="container">
     <h1><?= $assessment['title'] ?></h1>
     <h3>Welcome <?= $details->first_name . ' ' . $details->last_name ?></h3>
-    <div id="buttons">
+    <div id="toolbar">
         <button onclick="location.href='home.php'" class="button">Home</button>
         <button onclick="location.href='browse_courses.php'" class="button">Browse Courses</button>
         <button onclick="location.href='enroll_courses.php'" class="button">Enroll in Courses</button>
-        <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
+        <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
-        <button onclick="location.href='search.php'" class="button">Search</button>
-	<button onclick="location.href='logout.php'" class="button">Logout</button>
+        <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
+    	<button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
-
+        
     </div>
     <p></p>
     <h2>Assessment Questions:</h2>
