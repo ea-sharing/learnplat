@@ -36,20 +36,20 @@ $assessments = $result->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <div id="container">
     <h1>Assessments</h1>
-    <div class="theader">
-        <h3>Welcome <a href="userprofile.php"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
-        <a href="logout.php">Logout</a>
+    <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+        <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     </div>
-    <div id="buttons">
+    <div id="toolbar">
         <button onclick="location.href='home.php'" class="button">Home</button>
         <button onclick="location.href='browse_courses.php'" class="button">Browse Courses</button>
         <button onclick="location.href='enroll_courses.php'" class="button">Enroll in Courses</button>
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-	<button onclick="location.href='search.php'" class="button">Search</button>
+    	<button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
-
+        
     </div>
 
     <p></p>
