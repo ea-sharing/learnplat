@@ -111,121 +111,56 @@ function getCourses() {
 <html>
 <head>
     <title>Enroll in Courses</title>
-    <link rel="stylesheet" type="text/css" href="libs/style.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="style.css" charset="utf-8"/>
     <style>
-        .course-item {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .course-name {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .description {
-            margin-bottom: 10px;
-        }
-
-        .enroll-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            float: right;
-        }
-
-        .enroll-button:hover {
-            background-color: #45a049;
-        }
-
-        .unenroll-button {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            float: right;
-        }
-
-        .unenroll-button:hover {
-            background-color: #d32f2f;
-        }
-
-        .message {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .success {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .error {
-            background-color: #f44336;
-            color: white;
-        }
+        
     </style>
 </head>
 <body>
 <div id="container">
     <h1>Enroll in Courses</h1>
-    <div class="theader">
-        <h3>Welcome <a href="userprofile.php"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
-        <a href="logout.php">Logout</a>
+    <div id="user-profile">
+        <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+        <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     </div>
-    <div id="buttons">
+    <div id="toolbar">
         <button onclick="location.href='home.php'" class="button">Home</button>
         <button onclick="location.href='browse_courses.php'" class="button">Browse Courses</button>
         <button onclick="location.href='enroll_courses.php'" class="button">Enroll in Courses</button>
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-        <button onclick="location.href='search.php'" class="button">Search</button>
+	    <button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
-
     </div>
 
-    <p></p>
     <h2>Available Courses:</h2>
-    <p></p>
-    <?php if (isset($message)) { ?>
-        <div class="message success"><?php echo $message; ?></div>
-    <?php } ?>
-    <?php if (isset($error)) { ?>
-        <div class="message error"><?php echo $error; ?></div>
-    <?php } ?>
-    <p></p>
-    <?php
-    $courses = getCourses();
-    foreach ($courses as $course):
-        ?>
-        <div class="course-item">
-            <div class="course-info">
-                <span class="course-name"><?php echo $course['course_name']; ?></span>
-                <p class="description"><?php echo $course['description']; ?></p>
+
+    <div class="course-grid">
+        <?php
+        $courses = getCourses();
+        foreach ($courses as $course):
+            ?>
+            <div class="course-item">
+                <div class="course-info">
+                    <span class="course-name"><?php echo $course['course_name']; ?></span>
+                    <p class="description"><?php echo $course['description']; ?></p>
+                </div>
+                <?php if ($course['user_course_id']): ?>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
+                        <button type="submit" name="unenroll" class="unenroll-button">Unenroll</button>
+                    </form>
+                <?php else: ?>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
+                        <button type="submit" class="enroll-button">Enroll</button>
+                    </form>
+                <?php endif; ?>
             </div>
-            <?php if ($course['user_course_id']): ?>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
-                    <button type="submit" name="unenroll" class="unenroll-button">Unenroll</button>
-                </form>
-            <?php else: ?>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <input type="hidden" name="course_id" value="<?php echo $course['course_id']; ?>">
-                    <button type="submit" class="enroll-button">Enroll</button>
-                </form>
-            <?php endif; ?>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
 </div>
 </body>
 </html>
