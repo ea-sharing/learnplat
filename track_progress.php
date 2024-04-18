@@ -40,7 +40,7 @@ $stmt->execute();
 $passed_assessments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch user's blogs
-$stmt = $db->prepare("SELECT title FROM posts WHERE user_id = :uid");
+$stmt = $db->prepare("SELECT * FROM posts WHERE user_id = :uid");
 $stmt->bindParam(':uid', $_SESSION['uid']);
 $stmt->execute();
 $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
