@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     </div>
     <p></p>
-    <h2>Assessment Questions:</h2>
+    <h2><?= $assessment['title'] ?> Questions:</h2>
     <p></p>
     <form method="post">
         <?php foreach ($questions as $question): ?>
