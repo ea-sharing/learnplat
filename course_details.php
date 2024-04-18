@@ -121,7 +121,7 @@ if ($page * $per_page >= $total_sentences) {
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
     </div>
 
-    <h2>Course Content</h2>
+    <h2><?= $course_name ?> Course Content</h2>
     <p><?= $course_page_content ?></p>
 
     <?php if ($page > 1): ?>
