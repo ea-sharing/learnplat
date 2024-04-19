@@ -45,7 +45,6 @@ CREATE TABLE `assessment_results` (
 
 LOCK TABLES `assessment_results` WRITE;
 /*!40000 ALTER TABLE `assessment_results` DISABLE KEYS */;
-INSERT INTO `assessment_results` VALUES (12,14,2,9,10,90.00,'Pass','2024-04-19 02:42:13');
 /*!40000 ALTER TABLE `assessment_results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +123,6 @@ CREATE TABLE `certificates` (
 
 LOCK TABLES `certificates` WRITE;
 /*!40000 ALTER TABLE `certificates` DISABLE KEYS */;
-INSERT INTO `certificates` VALUES (39,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_WebDevelopment_certificate.pdf',1),(40,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DigitalMarketingEssentials_certificate.pdf',8),(41,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_MobileAppDevelopment_certificate.pdf',3),(42,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DataScience_certificate.pdf',2),(43,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_MobileAppDevelopment_certificate.pdf',3),(44,14,'https://learnplat2024s3.s3.amazonaws.com/certificates/Emil_14_DataScience_certificate.pdf',2);
 /*!40000 ALTER TABLE `certificates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +183,6 @@ CREATE TABLE `completed_courses` (
 
 LOCK TABLES `completed_courses` WRITE;
 /*!40000 ALTER TABLE `completed_courses` DISABLE KEYS */;
-INSERT INTO `completed_courses` VALUES (111,14,1,1),(112,14,8,1),(113,14,3,1),(114,14,2,1);
 /*!40000 ALTER TABLE `completed_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,4 +359,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18 23:22:44
+-- Dump completed on 2024-04-18 23:31:16
