@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     $content = $_POST['content'];
 
     $db = getDB();
-    $stmt = $db->prepare("UPDATE posts SET title = :title, content = :content WHERE id = :id AND user_id = :user_id");
+    $stmt = $db->prepare("UPDATE blogs SET title = :title, content = :content WHERE id = :id AND user_id = :user_id");
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':content', $content);
     $stmt->bindParam(':id', $id);
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     $db = getDB();
-    $stmt = $db->prepare("SELECT * FROM posts WHERE id = :id AND user_id = :user_id");
+    $stmt = $db->prepare("SELECT * FROM blogs WHERE id = :id AND user_id = :user_id");
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':user_id', $_SESSION['uid']);
     $stmt->execute();
