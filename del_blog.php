@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     include('libs/config.php');
 
     $db = getDB();
-    $stmt = $db->prepare("DELETE FROM posts WHERE id = :id AND user_id = :user_id");
+    $stmt = $db->prepare("DELETE FROM blogs WHERE id = :id AND user_id = :user_id");
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':user_id', $_SESSION['uid']);
     $stmt->execute();
