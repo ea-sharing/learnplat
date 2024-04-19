@@ -15,16 +15,16 @@ $details = $user->getDetails($_SESSION['uid']);
 
 $db = getDB();
 
-// Select all posts from the "posts" table, ordered by the "date" column
-$result = $db->query("SELECT * FROM posts ORDER BY date DESC");
+// Select all blogs from the "blogs" table, ordered by the "date" column
+$result = $db->query("SELECT * FROM blogs ORDER BY date DESC");
 
 // Check for errors
 if (!$result) {
     die('Error: ' . $db->errorInfo()[2]);
 }
 
-// Fetch all posts as an associative array
-$posts = $result->fetchAll(PDO::FETCH_ASSOC);
+// Fetch all blogs as an associative array
+$blogs = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -54,15 +54,15 @@ $posts = $result->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <p></p>
-    <h2>Blog Posts</h2>
+    <h2>Blog blogs</h2>
     <p></p>
 
 <main> 
-<?php if (empty($posts)): ?>
+<?php if (empty($blogs)): ?>
     <p>There are no blogs.</p>
     <p><a href="add_blog.php">Click here to add a new blog.</a></p>
 <?php else: ?>
-    <?php foreach ($posts as $blog): ?>
+    <?php foreach ($blogs as $blog): ?>
         <div class="blog-post">
             <h2><?= htmlspecialchars($blog['title']); ?></h2>
             <p><?= htmlspecialchars($blog['content']); ?></p>
