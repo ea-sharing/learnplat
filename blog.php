@@ -48,7 +48,7 @@ $blogs = $result->fetchAll(PDO::FETCH_ASSOC);
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
     	<button onclick="location.href='search.php'" class="button">Search</button>
-        <button onclick="location.href='about_us.php'">About Us</button>
+        <button onclick="location.href='about_us.php'"class="button">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
         
     </div>
