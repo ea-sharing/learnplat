@@ -31,7 +31,7 @@ $assessments = $result->fetchAll(PDO::FETCH_ASSOC);
 <html>
 <head>
     <title>Assessments</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="libs/style.css">
 </head>
 <body>
 <div id="container">
