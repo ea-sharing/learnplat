@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
 <body>
 <div id="container">
     <h1>User Profile</h1>
-    div id="user-profile">
+    <div id="user-profile">
         <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
         <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     </div>
