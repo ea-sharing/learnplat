@@ -72,8 +72,27 @@ $course_page_content = implode(' ', array_slice($sentences, $start, $end - $star
 
 // Update completed_courses table to mark the course as completed if it's the last page
 if ($page * $per_page >= $total_sentences) {
-    // Your existing code to mark course as completed and trigger certificate generation
+    // mark course as completed and trigger certificate generation
+    $stmt = $pdo->prepare("INSERT INTO completed_courses (uid, course_id, completed) VALUES (:uid, :course_id, 1) ON DUPLICATE KEY UPDATE completed = 1");
+    $stmt->bindParam(":uid", $_SESSION['uid']);
+    $stmt->bindParam(":course_id", $course_id);
+    $stmt->execute();
 
+    // Trigger PDF generation and S3 upload
+    require_once 'gen_cert.php'; // Include the certificate generation script
+    $pdfFilePath = generateCertificate($_SESSION['uid'], $details->first_name, $course_name); // Generate certificate PDF
+    $courseN = preg_replace('/\s+/', '', $course_name);
+    $keyName = 'certificates/' . $details->first_name . '_' . $_SESSION['uid'] . '_' . $courseN . '_certificate.pdf'; // Define S3 key name
+    $downloadLink = uploadToS3($pdfFilePath, $keyName); // Upload PDF to S3 and get the download link
+
+    // Store download link in the database
+    if ($downloadLink) {
+        $stmt = $pdo->prepare("INSERT INTO certificates (user_id, download_link, course_id) VALUES (:userId, :downloadLink, :course_id)");
+        $stmt->bindParam(":userId", $_SESSION['uid']);
+        $stmt->bindParam(":downloadLink", $downloadLink);
+        $stmt->bindParam(":course_id", $course_id);
+        $stmt->execute();
+    }
     // Display results in a popup
     echo "<script>
         window.onload = function() {
@@ -115,9 +134,10 @@ if ($page * $per_page >= $total_sentences) {
        	<button onclick="location.href='about_us.php'"class="button">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
     </div>
-
-    <h2>Course Content</h2>
+	
+    <h2><?= $course_name ?> Course Content</h2>
     <p><?= $course_page_content ?></p>
+	
 
     <?php if ($page > 1): ?>
         <a href="course_details.php?course_id=<?= $course_id ?>&page=<?= ($page - 1) ?>">Previous Page</a>
@@ -133,7 +153,7 @@ if ($page * $per_page >= $total_sentences) {
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('resultModal').style.display = 'none';">&times;</span>
         <h2>Course Completed!</h2>
-        <p>Congratulations! You have completed the course.</p>
+        <p>Congratulations! You have completed the course. You can visit <a href="track_progress.php">dashboard</a> for details.</p>
         <p>Download your certificate:</p>
         <a href="<?= $downloadLink ?>" download>Download Certificate</a>
     </div>
