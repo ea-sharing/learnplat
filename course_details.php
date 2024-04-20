@@ -47,7 +47,6 @@ if (isset($_GET['course_id'])) {
         exit;
     }
 
-
     // Fetch course content from the database
     $stmt = $pdo->prepare("SELECT coursecontent FROM courses WHERE course_id = :course_id");
     $stmt->bindParam(":course_id", $course_id);
@@ -73,26 +72,22 @@ $course_page_content = implode(' ', array_slice($sentences, $start, $end - $star
 
 // Update completed_courses table to mark the course as completed if it's the last page
 if ($page * $per_page >= $total_sentences) {
-    $stmt = $pdo->prepare("INSERT INTO completed_courses (uid, course_id, completed) VALUES (:uid, :course_id, 1) ON DUPLICATE KEY UPDATE completed = 1");
-    $stmt->bindParam(":uid", $_SESSION['uid']);
-    $stmt->bindParam(":course_id", $course_id);
-    $stmt->execute();
+    // Your existing code to mark course as completed and trigger certificate generation
 
-    // Trigger PDF generation and S3 upload
-    require_once 'gen_cert.php'; // Include the certificate generation script
-    $pdfFilePath = generateCertificate($_SESSION['uid'], $details->first_name, $course_name); // Generate certificate PDF
-    $courseN = preg_replace('/\s+/', '', $course_name);
-    $keyName = 'certificates/' . $details->first_name . '_' . $_SESSION['uid'] . '_' . $courseN . '_certificate.pdf'; // Define S3 key name
-    $downloadLink = uploadToS3($pdfFilePath, $keyName); // Upload PDF to S3 and get the download link
+    // Display results in a popup
+    echo "<script>
+        window.onload = function() {
+            var modal = document.getElementById('resultModal');
+            modal.style.display = 'block';
 
-    // Store download link in the database
-    if ($downloadLink) {
-        $stmt = $pdo->prepare("INSERT INTO certificates (user_id, download_link, course_id) VALUES (:userId, :downloadLink, :course_id)");
-        $stmt->bindParam(":userId", $_SESSION['uid']);
-        $stmt->bindParam(":downloadLink", $downloadLink);
-        $stmt->bindParam(":course_id", $course_id);
-        $stmt->execute();
-    }
+            // Close the modal when the user clicks outside of it
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        };
+    </script>";
 }
 ?>
 
@@ -116,12 +111,12 @@ if ($page * $per_page >= $total_sentences) {
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-	    <button onclick="location.href='search.php'" class="button">Search</button>
+	<button onclick="location.href='search.php'" class="button">Search</button>
         <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
     </div>
 
-    <h2><?= $course_name ?> Course Content</h2>
+    <h2>Course Content</h2>
     <p><?= $course_page_content ?></p>
 
     <?php if ($page > 1): ?>
@@ -143,6 +138,6 @@ if ($page * $per_page >= $total_sentences) {
         <a href="<?= $downloadLink ?>" download>Download Certificate</a>
     </div>
 </div>
+
 </body>
 </html>
-
