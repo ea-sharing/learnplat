@@ -154,7 +154,6 @@ if ($page * $per_page >= $total_sentences) {
         <span class="close" onclick="document.getElementById('resultModal').style.display = 'none';">&times;</span>
         <h2>Course Completed!</h2>
         <p>Congratulations! You have completed the course. You can visit <a href="track_progress.php">dashboard</a> for details.</p>
-        <p>Download your certificate:</p>
         <a href="<?= $downloadLink ?>" download>Download Certificate</a>
     </div>
 </div>
