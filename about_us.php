@@ -71,8 +71,8 @@ $details = $user->getDetails($_SESSION['uid']);
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-	      <button onclick="location.href='search.php'" class="button">Search</button>
-        <button onclick="location.href='about_us.php'">About Us</button>
+      	<button onclick="location.href='search.php'" class="button">Search</button>
+        <button onclick="location.href='about_us.php'"class="button">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
     </div>
     <div class="container about-us">
