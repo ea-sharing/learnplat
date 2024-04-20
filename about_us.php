@@ -31,7 +31,7 @@ $details = $user->getDetails($_SESSION['uid']);
 <html>
 <head>
     <title>About Us</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="libs/style.css">
 <style>
         /* Additional styles specific to the about_us page */
         .about-us {
