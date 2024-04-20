@@ -31,12 +31,13 @@ $assessments = $result->fetchAll(PDO::FETCH_ASSOC);
 <html>
 <head>
     <title>Assessments</title>
-    <link rel="stylesheet" type="text/css" href="libs/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <div id="container">
     <h1>Assessments</h1>
-    <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
+    <div id="user-profile">
+        <h3>Welcome <a href="userprofile.php?uid=<?= $_SESSION['uid'] ?>"><?= $details->first_name . ' ' . $details->last_name ?></a></h3>
         <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     </div>
     <div id="toolbar">
@@ -46,12 +47,11 @@ $assessments = $result->fetchAll(PDO::FETCH_ASSOC);
         <button onclick="location.href='assessments.php'" class="button">Assessments</button>
         <button onclick="location.href='blog.php'" class="button">Blogs</button>
         <button onclick="location.href='track_progress.php'" class="button">Dashboard</button>
-    	<button onclick="location.href='search.php'" class="button">Search</button>
+	    <button onclick="location.href='search.php'" class="button">Search</button>
         <button onclick="location.href='about_us.php'">About Us</button>
         <button onclick="location.href='contact.php'" class="button">Contact Us</button>
         
     </div>
-
     <p></p>
     <h2>Available Assessments:</h2>
     <p></p>
